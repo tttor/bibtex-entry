@@ -1,0 +1,16 @@
+@InProceedings{2018_pblbfgs_bollapragada,
+  title =    {A Progressive Batching L-{BFGS} Method for Machine Learning},
+  author =   {Bollapragada, Raghu and Nocedal, Jorge and Mudigere, Dheevatsa and Shi, Hao-Jun and Tang, Ping Tak Peter},
+  booktitle =    {Proceedings of the 35th International Conference on Machine Learning},
+  pages =    {620--629},
+  year =     {2018},
+  editor =   {Dy, Jennifer and Krause, Andreas},
+  volume =   {80},
+  series =   {Proceedings of Machine Learning Research},
+  address =      {Stockholmsmässan, Stockholm Sweden},
+  month =    {10--15 Jul},
+  publisher =    {PMLR},
+  pdf =      {http://proceedings.mlr.press/v80/bollapragada18a/bollapragada18a.pdf},
+  url =      {http://proceedings.mlr.press/v80/bollapragada18a.html},
+  abstract =     {The standard L-BFGS method relies on gradient approximations that are not dominated by noise, so that search directions are descent directions, the line search is reliable, and quasi-Newton updating yields useful quadratic models of the objective function. All of this appears to call for a full batch approach, but since small batch sizes give rise to faster algorithms with better generalization properties, L-BFGS is currently not considered an algorithm of choice for large-scale machine learning applications. One need not, however, choose between the two extremes represented by the full batch or highly stochastic regimes, and may instead follow a progressive batching approach in which the sample size increases during the course of the optimization. In this paper, we present a new version of the L-BFGS algorithm that combines three basic components - progressive batching, a stochastic line search, and stable quasi-Newton updating - and that performs well on training logistic regression and deep neural networks. We provide supporting convergence theory for the method.}
+}
