@@ -3,47 +3,41 @@
 # https://stackoverflow.com/questions/5137497/find-current-directory-and-files-directory
 import sys, os
 
+delim = '_'
+ext = '.bib'
+cmds = ['\cite{', '\citep{']
+
 def main():
     assert len(sys.argv)==2
     outbibfpath = sys.argv[1]
-    indir = os.path.dirname(os.path.realpath(__file__))
+    indir = os.path.dirname( os.path.dirname(os.path.realpath(__file__)) )
     outdir = os.path.dirname(outbibfpath)
-
-    bib_keys = normalize(find_bib(indir))
+    bib_keys = dict([(normalize_key(k), k) for k in find_bib(indir)])
     cite_keys = find_cite(outdir)
 
     with open(outbibfpath, 'w') as outfile:
         for ck in cite_keys:
-            ck = normalize(ck)
+            ck = normalize_key(ck); assert ck in bib_keys.keys()
+            with open(os.path.join(indir, bib_keys[ck]+ext), 'r') as infile:
+                outfile.write(infile.read().replace(bib_keys[ck], ck))
 
-        for fname in os.listdir(indir):
-            if fname in ['merge.py', 'README.md', 'LICENSE', '.git']: continue
-            with open(os.path.join(indir, fname), 'r') as infile:
-                print(infile.read())
-                exit()
-                outfile.write(infile.read())
-
-def normalize(keys):
-    delim = '_'; normalized_keys = []
-    for k in keys:
-        normalized_keys.append( delim.join(sorted(k.split(delim))) )
-    return normalized_keys
+def normalize_key(k):
+    return delim.join(sorted(k.split(delim)))
 
 def find_bib(indir):
     bib_keys = []
     for fname in os.listdir(indir):
-        if fname in ['merge.py', 'README.md', 'LICENSE', '.git']: continue
-        bib_keys.append(fname.replace('.bib',''))
+        if ext not in fname: continue
+        bib_keys.append(fname.replace(ext, ''))
     return bib_keys
 
 def find_cite(outdir):
     def find(fpath):
-        keys = ['\cite{', '\citep{']
         cite_keys = []
         with open(fpath, 'r') as f:
             for row in f:
                 row = row.strip()
-                for k in keys:
+                for k in cmds:
                     cnt = row.count(k)
                     if cnt==0: continue
 
