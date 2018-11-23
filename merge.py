@@ -10,12 +10,17 @@ def main():
     outdir = os.path.dirname(outbibfpath)
 
     bib_keys = normalize(find_bib(indir))
-    cite_keys = normalize(find_cite(outdir))
+    cite_keys = find_cite(outdir)
 
     with open(outbibfpath, 'w') as outfile:
+        for ck in cite_keys:
+            ck = normalize(ck)
+
         for fname in os.listdir(indir):
             if fname in ['merge.py', 'README.md', 'LICENSE', '.git']: continue
             with open(os.path.join(indir, fname), 'r') as infile:
+                print(infile.read())
+                exit()
                 outfile.write(infile.read())
 
 def normalize(keys):
