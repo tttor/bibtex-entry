@@ -14,12 +14,14 @@ def main():
     outdir = os.path.dirname(outbibfpath)
     bib_keys = dict([(normalize_key(k), k) for k in find_bib(indir)])
     cite_keys = find_cite(outdir)
+    print(cite_keys)
+    print(len(cite_keys))
 
     with open(outbibfpath, 'w') as outfile:
         for ck in cite_keys:
-            ck = normalize_key(ck); assert ck in bib_keys.keys()
-            with open(os.path.join(indir, bib_keys[ck]+ext), 'r') as infile:
-                outfile.write(infile.read().replace(bib_keys[ck], ck))
+            norm_ck = normalize_key(ck)
+            with open(os.path.join(indir, bib_keys[norm_ck]+ext), 'r') as infile:
+                outfile.write(infile.read().replace(bib_keys[norm_ck], ck))
 
 def normalize_key(k):
     return delim.join(sorted(k.split(delim)))
