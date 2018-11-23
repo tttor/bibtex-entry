@@ -10,7 +10,7 @@ cmds = ['\cite{', '\citep{']
 def main():
     assert len(sys.argv)==2
     outbibfpath = sys.argv[1]
-    indir = os.path.dirname( os.path.dirname(os.path.realpath(__file__)) )
+    indir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'entry')
     outdir = os.path.dirname(outbibfpath)
     bib_keys = dict([(normalize_key(k), k) for k in find_bib(indir)])
     cite_keys = find_cite(outdir)

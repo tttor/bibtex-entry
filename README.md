@@ -1,7 +1,7 @@
 # bibtex-entry
 Bibtex entries.
 
-* merging: [merge.py](zzzscript/merge.py)
+* merging: [merge.py](script/merge.py)
 ```
-python3 ~/ws/bibtex-entry/zzzscript/merge.py $BUILD_DIR/ref.bib
+python3 ~/ws/bibtex-entry/script/merge.py $BUILD_DIR/ref.bib
 ```
