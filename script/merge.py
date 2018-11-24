@@ -20,6 +20,7 @@ def main():
     with open(outbibfpath, 'w') as outfile:
         for ck in cite_keys:
             norm_ck = normalize_key(ck)
+            if norm_ck not in bib_keys.keys(): continue
             with open(os.path.join(indir, bib_keys[norm_ck]+ext), 'r') as infile:
                 outfile.write(infile.read().replace(bib_keys[norm_ck], ck))
 
