@@ -14,8 +14,7 @@ def main():
     outdir = os.path.dirname(outbibfpath)
     bib_keys = dict([(normalize_key(k), k) for k in find_bib(indir)])
     cite_keys = find_cite(outdir)
-    print(cite_keys)
-    print(len(cite_keys))
+    # print(cite_keys)
 
     with open(outbibfpath, 'w') as outfile:
         for ck in cite_keys:
