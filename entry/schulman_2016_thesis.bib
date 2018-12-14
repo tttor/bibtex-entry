@@ -1,0 +1,13 @@
+@phdthesis{schulman_2016_thesis,
+    Author = {Schulman, John},
+    Title = {Optimizing Expectations: From Deep Reinforcement Learning to Stochastic Computation Graphs},
+    School = {EECS Department, University of California, Berkeley},
+    Year = {2016},
+    Month = {Dec},
+    URL = {http://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-217.html},
+    Number = {UCB/EECS-2016-217},
+    Abstract = {
+This thesis is mostly focused on reinforcement learning, which is viewed as an optimization problem: maximize the expected total reward with respect to the parameters of the policy. The first part of the thesis is concerned with making policy gradient methods more sample-efficient and reliable, especially when used with expressive nonlinear function approximators such as neural networks. Chapter 3 considers how to ensure that policy updates lead to monotonic improvement, and how to optimally update a policy given a batch of sampled trajectories. After providing a theoretical analysis, we propose a practical method called trust region policy optimization (TRPO), which performs well on two challenging tasks: simulated robotic locomotion, and playing Atari games using screen images as input. Chapter 4 looks at improving sample complexity of policy gradient methods in a way that is complementary to TRPO: reducing the variance of policy gradient estimates using a state-value function. Using this method, we obtain state-of-the-art results for learning locomotion controllers for simulated 3D robots.
+
+Reinforcement learning can be viewed as a special case of optimizing an expectation, and similar optimization problems arise in other areas of machine learning; for example, in variational inference, and when using architectures that include mechanisms for memory and attention. Chapter 5  provides a unifying view of these problems, with a general calculus for obtaining gradient estimators of objectives that involve a mixture of sampled random variables and differentiable operations. This unifying view motivates applying algorithms from reinforcement learning to other prediction and probabilistic modeling problems.}
+}
