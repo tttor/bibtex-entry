@@ -23,9 +23,6 @@ def main():
             with open(os.path.join(entrydir, bib_keys[norm_ck]+ext), 'r') as infile:
                 outfile.write(infile.read().replace(bib_keys[norm_ck], ck))
 
-def normalize_key(k):
-    return delim.join(sorted(k.split(delim)))
-
 def find_bib(entrydir):
     bib_keys = []
     for fname in os.listdir(entrydir):
@@ -56,6 +53,9 @@ def find_cite(outdir):
         if '.tex' not in fname: continue
         cite_keys += find(os.path.join(outdir, fname))
     return list(set(cite_keys))
+
+def normalize_key(k):
+    return delim.join(sorted(k.split(delim)))
 
 if __name__ == '__main__':
     main()
