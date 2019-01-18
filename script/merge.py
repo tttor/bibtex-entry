@@ -31,7 +31,7 @@ def find_bib(entrydir):
     return bib_keys
 
 def find_cite(outdir):
-    def find(fpath):
+    def _find_cite(fpath):
         cite_keys = []
         with open(fpath, 'r') as f:
             for row in f:
@@ -51,7 +51,7 @@ def find_cite(outdir):
     cite_keys = []
     for fname in os.listdir(outdir):
         if '.tex' not in fname: continue
-        cite_keys += find(os.path.join(outdir, fname))
+        cite_keys += _find_cite(os.path.join(outdir, fname))
     return list(set(cite_keys))
 
 def normalize_key(k):
