@@ -2,6 +2,7 @@
 # https://stackoverflow.com/questions/13613336/python-concatenate-text-files
 # https://stackoverflow.com/questions/5137497/find-current-directory-and-files-directory
 import sys, os
+from glob import glob
 
 delim = '_'
 ext = '.bib'
@@ -48,10 +49,10 @@ def find_cite(outdir):
                         cite_keys += [i.strip() for i in cite_str.split(',')]
                         start_idx = end_idx+1
         return cite_keys
-    cite_keys = []
-    for fname in os.listdir(outdir):
-        if '.tex' not in fname: continue
-        cite_keys += _find_cite(os.path.join(outdir, fname))
+
+    tex_fpaths = [y for x in os.walk(outdir) for y in glob(os.path.join(x[0], '*.tex'))] # https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python
+    cite_keys = [_find_cite(fpath) for fpath in tex_fpaths]
+    cite_keys = [item for sublist in cite_keys for item in sublist] # https://stackoverflow.com/questions/14807689/python-list-comprehension-to-join-list-of-lists
     return list(set(cite_keys))
 
 def normalize_key(k):
