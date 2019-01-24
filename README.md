@@ -3,5 +3,8 @@ Bibtex entries.
 
 * merging: [merge.py](script/merge.py)
 ```
-python3 ~/ws/bibtex-entry/script/merge.py $BUILD_DIR/ref.bib
+python3 ~/ws/bibtex-entry/script/merge.py $BUILD_DIR/main.bib
 ```
+
+# Ref
+* https://verbosus.com/bibtex-style-examples.html
