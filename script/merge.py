@@ -13,16 +13,15 @@ def main():
     outbibfpath = sys.argv[1]
     outdir = os.path.dirname(outbibfpath)
     entrydir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'entry')
-    bib_keys = dict([(normalize_key(k), k) for k in find_bib(entrydir)])
+    bib_keys = find_bib(entrydir)
     cite_keys = find_cite(outdir)
     # print(cite_keys)
 
     with open(outbibfpath, 'w') as outfile:
         for ck in cite_keys:
-            norm_ck = normalize_key(ck)
-            if norm_ck not in bib_keys.keys(): continue
-            with open(os.path.join(entrydir, bib_keys[norm_ck]+ext), 'r') as infile:
-                outfile.write(infile.read().replace(bib_keys[norm_ck], ck))
+            if ck not in bib_keys: continue
+            with open(os.path.join(entrydir, ck+ext), 'r') as infile:
+                outfile.write(infile.read())
 
 def find_bib(entrydir):
     bib_keys = []
@@ -54,9 +53,6 @@ def find_cite(outdir):
     cite_keys = [_find_cite(fpath) for fpath in tex_fpaths]
     cite_keys = [item for sublist in cite_keys for item in sublist] # https://stackoverflow.com/questions/14807689/python-list-comprehension-to-join-list-of-lists
     return list(set(cite_keys))
-
-def normalize_key(k):
-    return delim.join(sorted(k.split(delim)))
 
 if __name__ == '__main__':
     main()
