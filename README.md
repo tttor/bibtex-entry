@@ -6,5 +6,5 @@ Bibtex entries.
 python3 ~/ws/bibtex-entry/script/merge.py $BUILD_DIR/main.bib
 ```
 
-# Ref
+# reference
 * https://verbosus.com/bibtex-style-examples.html
