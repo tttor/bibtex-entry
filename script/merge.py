@@ -44,6 +44,11 @@ def find_cite(outdir):
                     for c in range(cnt):
                         start_idx = row.find(k, start_idx)
                         end_idx = row.find('}', start_idx )
+                        if end_idx==-1:
+                            print('!!! FATAL: can not handle multirow citations !!!')
+                            print(fpath)
+                            print(row)
+                            exit()
                         cite_str = row[start_idx:end_idx].replace(k,'')
                         cite_keys += [i.strip() for i in cite_str.split(',')]
                         start_idx = end_idx+1
