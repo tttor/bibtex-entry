@@ -22,6 +22,7 @@ def main():
             if ck not in bib_keys: continue
             with open(os.path.join(entrydir, ck+ext), 'r') as infile:
                 outfile.write(infile.read())
+            outfile.write('\n') # a blank line between 2 entries
 
 def find_bib(entrydir):
     bib_keys = []
