@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo '=== committing ==='
 git add --all
 git commit -a -m add
 
