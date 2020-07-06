@@ -8,5 +8,5 @@ git commit -a -m add
 echo '=== github.com ==='
 git push origin master
 
-echo '=== github.com ==='
+echo '=== bitbucket.org ==='
 git push originbitbucket master
