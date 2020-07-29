@@ -1,12 +1,23 @@
 #!/usr/bin/env python3
 # https://stackoverflow.com/questions/13613336/python-concatenate-text-files
 # https://stackoverflow.com/questions/5137497/find-current-directory-and-files-directory
+# https://stackoverflow.com/questions/287871/how-to-print-colored-text-in-python
 import sys, os
 from glob import glob
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 delim = '_'
 ext = '.bib'
-cmds = ['\cite{', '\citep{']
+cmdtypes = ['\cite{', '\citep{']
 
 def main():
     assert len(sys.argv)==2
@@ -35,22 +46,23 @@ def find_cite(outdir):
     def _find_cite(fpath):
         cite_keys = []
         with open(fpath, 'r') as f:
-            for row in f:
+            for rowidx, row in enumerate(f):
                 row = row.strip()
-                for k in cmds:
-                    cnt = row.count(k)
-                    if cnt==0: continue
+                for cmd in cmdtypes:
+                    ncmd = row.count(cmd)
+                    if ncmd==0: continue
 
                     start_idx = 0
-                    for c in range(cnt):
-                        start_idx = row.find(k, start_idx)
+                    for c in range(ncmd):
+                        start_idx = row.find(cmd, start_idx)
                         end_idx = row.find('}', start_idx )
                         if end_idx==-1:
-                            print('!!! FATAL: can not handle multirow citations !!!')
-                            print(fpath)
-                            print(row)
+                            end_idx
+                            print(bcolors.FAIL + '!!! FATAL: can not handle multirow citations !!!')
+                            print('FPATH', fpath)
+                            print('ROW', rowidx, row)
                             exit()
-                        cite_str = row[start_idx:end_idx].replace(k,'')
+                        cite_str = row[start_idx:end_idx].replace(cmd,'')
                         cite_keys += [i.strip() for i in cite_str.split(',')]
                         start_idx = end_idx+1
         return cite_keys
