@@ -60,7 +60,7 @@ def find_cite(outdir):
                             end_idx
                             print(bcolors.FAIL + '!!! FATAL: can not handle multirow citations !!!')
                             print('FPATH', fpath)
-                            print('ROW', rowidx, row)
+                            print('ROW', rowidx+1, row)
                             exit()
                         cite_str = row[start_idx:end_idx].replace(cmd,'')
                         cite_keys += [i.strip() for i in cite_str.split(',')]
