@@ -17,7 +17,7 @@ class bcolors:
 
 delim = '_'
 ext = '.bib'
-cmdtypes = ['\cite{', '\citep{']
+cmdtypes = ['\cite', '\citep']
 
 def main():
     assert len(sys.argv)==2
@@ -54,14 +54,15 @@ def find_cite(outdir):
 
                     start_idx = 0
                     for c in range(ncmd):
-                        start_idx = row.find(cmd, start_idx)
+                        cmd_idx = row.find(cmd, start_idx)
+                        start_idx = row.find('{', cmd_idx + len(cmd))
                         end_idx = row.find('}', start_idx)
-                        if end_idx==-1: # '}' is not found
+                        if start_idx==-1 or end_idx==-1: # `-1`: not found
                             print(bcolors.FAIL + '!!! FATAL: can not handle multirow citations !!!')
                             print('FPATH', fpath)
                             print('ROW', rowidx+1, row)
                             exit()
-                        cite_str = row[start_idx:end_idx].replace(cmd,'')
+                        cite_str = row[start_idx + 1:end_idx]
                         cite_keys += [i.strip() for i in cite_str.split(',')]
                         start_idx = end_idx+1
         return cite_keys
