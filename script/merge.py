@@ -49,15 +49,14 @@ def find_cite(outdir):
             for rowidx, row in enumerate(f):
                 row = row.strip()
                 for cmd in cmdtypes:
-                    ncmd = row.count(cmd)
+                    ncmd = row.count(cmd) # number of cmds found in this row/line
                     if ncmd==0: continue
 
                     start_idx = 0
                     for c in range(ncmd):
                         start_idx = row.find(cmd, start_idx)
-                        end_idx = row.find('}', start_idx )
-                        if end_idx==-1:
-                            end_idx
+                        end_idx = row.find('}', start_idx)
+                        if end_idx==-1: # '}' is not found
                             print(bcolors.FAIL + '!!! FATAL: can not handle multirow citations !!!')
                             print('FPATH', fpath)
                             print('ROW', rowidx+1, row)
