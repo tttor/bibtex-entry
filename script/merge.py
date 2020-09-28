@@ -17,7 +17,7 @@ class bcolors:
 
 delim = '_'
 ext = '.bib'
-cmdtypes = ['\cite{', '\cite[', '\citep{', 'citep[']
+cmdtypes = ['\cite{', '\cite[', '\citep{', 'citep[', '\citet{', '\citet[']
 
 def main():
     assert len(sys.argv)==2
